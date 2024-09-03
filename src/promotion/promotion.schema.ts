@@ -1,30 +1,30 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+// import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+// import { Document } from 'mongoose';
 
-export type PromotionDocument = Promotion & Document;
+// export type PromotionDocument = Promotion & Document;
 
-@Schema()
-export class Promotion {
-  @Prop({ required: true })
-  restaurantId: string;
+// @Schema()
+// export class Promotion {
+//   @Prop({ required: true })
+//   restaurantId: string;
 
-  @Prop({ required: true })
-  title: string;
+//   @Prop({ required: true })
+//   title: string;
 
-  @Prop({ required: true })
-  description: string;
+//   @Prop({ required: true })
+//   description: string;
 
-  @Prop({ required: true })
-  discountPercentage: number;
+//   @Prop({ required: true })
+//   discountPercentage: number;
 
-  @Prop({ required: true })
-  startDate: Date;
+//   @Prop({ required: true })
+//   startDate: Date;
 
-  @Prop({ required: true })
-  endDate: Date;
-}
+//   @Prop({ required: true })
+//   endDate: Date;
+// }
 
-export const PromotionSchema = SchemaFactory.createForClass(Promotion);
+// export const PromotionSchema = SchemaFactory.createForClass(Promotion);
 
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';

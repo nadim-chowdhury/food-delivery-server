@@ -1,39 +1,10 @@
-import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
-import { RestaurantService } from './restaurant.service';
-import { CreateRestaurantDto } from './dto/create-restaurant.dto';
-
-@Controller('restaurants')
-export class RestaurantController {
-  constructor(private readonly restaurantService: RestaurantService) {}
-
-  @Post()
-  async create(@Body() createRestaurantDto: CreateRestaurantDto) {
-    return this.restaurantService.create(createRestaurantDto);
-  }
-
-  @Get()
-  async findAll() {
-    return this.restaurantService.findAll();
-  }
-
-  @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return this.restaurantService.findOne(id);
-  }
-
-  @Get('filter')
-  async filterBy(@Query() query: any) {
-    return this.restaurantService.filterBy(query);
-  }
-}
-
-
 import {
   Controller,
   Post,
   Body,
   Put,
   Param,
+  Delete,
   UseGuards,
   Request,
 } from '@nestjs/common';
@@ -102,20 +73,12 @@ export class RestaurantController {
   async deleteMenuItem(@Request() req, @Param('itemId') itemId: string) {
     return this.restaurantService.deleteMenuItem(req.user.userId, itemId);
   }
-}
-
-
-import { Put, Body } from '@nestjs/common';
-
-@Controller('restaurants')
-export class RestaurantController {
-  // ... existing methods
 
   @UseGuards(JwtAuthGuard)
   @Put('reviews/:id/respond')
   async respondToReview(
     @Param('id') reviewId: string,
-    @Body() response: string,
+    @Body() { response }: { response: string },
   ) {
     return this.restaurantService.respondToReview(reviewId, response);
   }

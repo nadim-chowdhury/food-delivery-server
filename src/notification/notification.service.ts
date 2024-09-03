@@ -1,24 +1,23 @@
-import { Injectable } from '@nestjs/common';
-import { messaging } from '../common/firebase.config';
+// import { Injectable } from '@nestjs/common';
+// import { messaging } from '../common/firebase.config';
 
-@Injectable()
-export class NotificationService {
-  async sendNotification(
-    token: string,
-    title: string,
-    body: string,
-  ): Promise<void> {
-    const message = {
-      notification: {
-        title,
-        body,
-      },
-      token,
-    };
-    await messaging.send(message);
-  }
-}
-
+// @Injectable()
+// export class NotificationService {
+//   async sendNotification(
+//     token: string,
+//     title: string,
+//     body: string,
+//   ): Promise<void> {
+//     const message = {
+//       notification: {
+//         title,
+//         body,
+//       },
+//       token,
+//     };
+//     await messaging.send(message);
+//   }
+// }
 
 import { Injectable } from '@nestjs/common';
 

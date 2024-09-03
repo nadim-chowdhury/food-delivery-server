@@ -13,8 +13,9 @@ export class AuthService {
   async validateRider(email: string, pass: string): Promise<any> {
     const rider = await this.riderService.findOneByEmail(email);
     if (rider && (await bcrypt.compare(pass, rider.password))) {
-      const { password, ...result } = rider.toObject();
-      return result;
+      // const { password, ...result } = rider.toObject();
+      // return result;
+      return rider;
     }
     return null;
   }

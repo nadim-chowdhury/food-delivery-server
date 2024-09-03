@@ -1,7 +1,10 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body, UseGuards } from '@nestjs/common';
 import { PaymentService } from './payment.service';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+// import { RolesGuard } from '../auth/roles.guard';
+// import { Roles } from '../auth/roles.decorator';
 
-@Controller('payment')
+@Controller('payments')
 export class PaymentController {
   constructor(private readonly paymentService: PaymentService) {}
 
@@ -12,30 +15,23 @@ export class PaymentController {
   ) {
     return this.paymentService.createPaymentIntent(amount, currency);
   }
-}
 
-import { Controller, Get, Post, Param, Body, UseGuards } from '@nestjs/common';
-import { PaymentService } from './payment.service';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { RolesGuard } from '../auth/roles.guard';
-import { Roles } from '../auth/roles.decorator';
-
-@Controller('admin/payments')
-@UseGuards(JwtAuthGuard, RolesGuard)
-@Roles('admin')
-export class PaymentController {
-  constructor(private readonly paymentService: PaymentService) {}
-
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Roles('admin')
   @Get()
   async getAllPayments() {
     return this.paymentService.getAllPayments();
   }
 
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Roles('admin')
   @Get('order/:orderId')
   async getPaymentsByOrderId(@Param('orderId') orderId: string) {
     return this.paymentService.getPaymentsByOrderId(orderId);
   }
 
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Roles('admin')
   @Post()
   async createPayment(
     @Body()

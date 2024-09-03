@@ -1,13 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import Stripe from 'stripe';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Payment, PaymentDocument } from './payment.schema';
 
 @Injectable()
 export class PaymentService {
   private stripe: Stripe;
 
-  constructor() {
+  constructor(
+    @InjectModel(Payment.name) private paymentModel: Model<PaymentDocument>,
+  ) {
     this.stripe = new Stripe('your-stripe-secret-key', {
-      apiVersion: '2020-08-27',
+      apiVersion: '2024-06-20',
     });
   }
 
@@ -20,18 +25,6 @@ export class PaymentService {
       currency,
     });
   }
-}
-
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { Payment, PaymentDocument } from './payment.schema';
-
-@Injectable()
-export class PaymentService {
-  constructor(
-    @InjectModel(Payment.name) private paymentModel: Model<PaymentDocument>,
-  ) {}
 
   async getAllPayments(): Promise<Payment[]> {
     return this.paymentModel.find().exec();

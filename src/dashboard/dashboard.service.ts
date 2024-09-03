@@ -16,21 +16,21 @@ export class DashboardService {
   ) {}
 
   async getOverview() {
-    const activeUsers = await this.userModel
-      .countDocuments({ isActive: true })
-      .exec();
+    // const activeUsers = await this.userModel
+    //   .countDocuments({ isActive: true })
+    //   .exec();
     const totalOrders = await this.orderModel.countDocuments().exec();
-    const activeRestaurants = await this.restaurantModel
-      .countDocuments({ isActive: true })
-      .exec();
+    // const activeRestaurants = await this.restaurantModel
+    //   .countDocuments({ isActive: true })
+    //   .exec();
     const activeRiders = await this.riderModel
       .countDocuments({ isAvailable: true })
       .exec();
 
     return {
-      activeUsers,
+      // activeUsers,
       totalOrders,
-      activeRestaurants,
+      // activeRestaurants,
       activeRiders,
     };
   }

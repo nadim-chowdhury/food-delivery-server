@@ -1,34 +1,3 @@
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { Restaurant, RestaurantDocument } from './restaurant.schema';
-import { CreateRestaurantDto } from './dto/create-restaurant.dto';
-
-@Injectable()
-export class RestaurantService {
-  constructor(
-    @InjectModel(Restaurant.name)
-    private restaurantModel: Model<RestaurantDocument>,
-  ) {}
-
-  async create(createRestaurantDto: CreateRestaurantDto): Promise<Restaurant> {
-    const createdRestaurant = new this.restaurantModel(createRestaurantDto);
-    return createdRestaurant.save();
-  }
-
-  async findAll(): Promise<Restaurant[]> {
-    return this.restaurantModel.find().exec();
-  }
-
-  async findOne(id: string): Promise<Restaurant> {
-    return this.restaurantModel.findById(id).exec();
-  }
-
-  async filterBy(criteria: any): Promise<Restaurant[]> {
-    return this.restaurantModel.find(criteria).exec();
-  }
-}
-
 import {
   Injectable,
   NotFoundException,
@@ -40,14 +9,17 @@ import { Restaurant, RestaurantDocument } from './restaurant.schema';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 import { CreateMenuItemDto } from './dto/create-menu-item.dto';
-import * as bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
+import * as bcrypt from 'bcryptjs';
+import { Review, ReviewDocument } from './review.schema';
 
 @Injectable()
 export class RestaurantService {
   constructor(
     @InjectModel(Restaurant.name)
     private restaurantModel: Model<RestaurantDocument>,
+    @InjectModel(Review.name)
+    private reviewModel: Model<ReviewDocument>, // Inject Review model
     private jwtService: JwtService,
   ) {}
 
@@ -137,11 +109,6 @@ export class RestaurantService {
     restaurant.menu = restaurant.menu.filter((item) => item._id != itemId);
     return restaurant.save();
   }
-}
-
-@Injectable()
-export class RestaurantService {
-  // ... existing methods
 
   async respondToReview(reviewId: string, response: string): Promise<Review> {
     const review = await this.reviewModel.findById(reviewId);

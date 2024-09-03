@@ -8,9 +8,9 @@ export class CreateOrderDto {
   readonly scheduleTime?: Date;
 }
 
-export class CreateOrderDto {
-  readonly customerId: string;
-  readonly restaurantId: string;
-  readonly items: { itemId: string; quantity: number; price: number }[];
-  readonly totalAmount: number;
-}
+// export class CreateOrderDto {
+//   readonly customerId: string;
+//   readonly restaurantId: string;
+//   readonly items: { itemId: string; quantity: number; price: number }[];
+//   readonly totalAmount: number;
+// }

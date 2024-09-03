@@ -28,23 +28,23 @@ export class ChatGateway {
   }
 }
 
-import {
-  WebSocketGateway,
-  WebSocketServer,
-  SubscribeMessage,
-  MessageBody,
-} from '@nestjs/websockets';
-import { Logger } from '@nestjs/common';
+// import {
+//   WebSocketGateway,
+//   WebSocketServer,
+//   SubscribeMessage,
+//   MessageBody,
+// } from '@nestjs/websockets';
+// import { Logger } from '@nestjs/common';
 
-@WebSocketGateway()
-export class ChatGateway {
-  @WebSocketServer() server;
+// @WebSocketGateway()
+// export class ChatGateway {
+//   @WebSocketServer() server;
 
-  private logger: Logger = new Logger('ChatGateway');
+//   private logger: Logger = new Logger('ChatGateway');
 
-  @SubscribeMessage('messageToServer')
-  handleMessage(@MessageBody() data: any): string {
-    this.logger.log(data);
-    return 'Message received and sent to clients!';
-  }
-}
+//   @SubscribeMessage('messageToServer')
+//   handleMessage(@MessageBody() data: any): string {
+//     this.logger.log(data);
+//     return 'Message received and sent to clients!';
+//   }
+// }

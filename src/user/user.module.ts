@@ -1,12 +1,12 @@
-import { Module } from '@nestjs/common';
-import { UserService } from './user.service';
-import { UserController } from './user.controller';
+// import { Module } from '@nestjs/common';
+// import { UserService } from './user.service';
+// import { UserController } from './user.controller';
 
-@Module({
-  providers: [UserService],
-  controllers: [UserController],
-})
-export class UserModule {}
+// @Module({
+//   providers: [UserService],
+//   controllers: [UserController],
+// })
+// export class UserModule {}
 
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';

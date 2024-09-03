@@ -12,7 +12,7 @@ export class Payment {
   amount: number;
 
   @Prop({ required: true })
-  paymentMethod: string; // Credit Card, PayPal, etc.
+  paymentMethod: string; // e.g., Credit Card, PayPal
 
   @Prop({ default: Date.now })
   createdAt: Date;

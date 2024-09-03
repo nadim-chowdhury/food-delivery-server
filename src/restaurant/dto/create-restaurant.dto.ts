@@ -6,12 +6,13 @@ export class CreateRestaurantDto {
   readonly priceRange?: string;
   readonly menu?: string[];
   readonly details?: string;
-}
-
-export class CreateRestaurantDto {
-  readonly name: string;
-  readonly address: string;
-  readonly contact: string;
-  readonly email: string;
   readonly password: string;
 }
+
+// export class CreateRestaurantDto {
+//   readonly name: string;
+//   readonly address: string;
+//   readonly contact: string;
+//   readonly email: string;
+//   readonly password: string;
+// }

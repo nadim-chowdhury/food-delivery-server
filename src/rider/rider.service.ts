@@ -4,12 +4,15 @@ import { Model } from 'mongoose';
 import { Rider, RiderDocument } from './rider.schema';
 import { CreateRiderDto } from './dto/create-rider.dto';
 import { UpdateRiderDto } from './dto/update-rider.dto';
+// import { OrderService } from '../orders/order.service'; // Assuming there's an OrderService
 import * as bcrypt from 'bcrypt';
+import { OrderService } from 'src/order/order.service';
 
 @Injectable()
 export class RiderService {
   constructor(
     @InjectModel(Rider.name) private riderModel: Model<RiderDocument>,
+    private orderService: OrderService,
   ) {}
 
   async create(createRiderDto: CreateRiderDto): Promise<Rider> {
@@ -46,5 +49,19 @@ export class RiderService {
       throw new NotFoundException('Rider not found');
     }
     return updatedRider;
+  }
+
+  async acceptOrder(riderId: string, orderId: string): Promise<any> {
+    const rider = await this.findOneById(riderId);
+    if (!rider) {
+      throw new NotFoundException('Rider not found');
+    }
+    // Call a method in OrderService to accept the order
+    // return this.orderService.assignOrderToRider(orderId, riderId);
+  }
+
+  async updateOrderStatus(orderId: string, status: string): Promise<any> {
+    // Call a method in OrderService to update the status of the order
+    // return this.orderService.updateOrderStatus(orderId, status);
   }
 }

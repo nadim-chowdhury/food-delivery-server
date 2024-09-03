@@ -1,32 +1,32 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { Promotion, PromotionDocument } from './promotion.schema';
-import { CreatePromotionDto } from './dto/create-promotion.dto';
+// import { Injectable, NotFoundException } from '@nestjs/common';
+// import { InjectModel } from '@nestjs/mongoose';
+// import { Model } from 'mongoose';
+// import { Promotion, PromotionDocument } from './promotion.schema';
+// import { CreatePromotionDto } from './dto/create-promotion.dto';
 
-@Injectable()
-export class PromotionService {
-  constructor(
-    @InjectModel(Promotion.name)
-    private promotionModel: Model<PromotionDocument>,
-  ) {}
+// @Injectable()
+// export class PromotionService {
+//   constructor(
+//     @InjectModel(Promotion.name)
+//     private promotionModel: Model<PromotionDocument>,
+//   ) {}
 
-  async create(createPromotionDto: CreatePromotionDto): Promise<Promotion> {
-    const createdPromotion = new this.promotionModel(createPromotionDto);
-    return createdPromotion.save();
-  }
+//   async create(createPromotionDto: CreatePromotionDto): Promise<Promotion> {
+//     const createdPromotion = new this.promotionModel(createPromotionDto);
+//     return createdPromotion.save();
+//   }
 
-  async findAllByRestaurant(restaurantId: string): Promise<Promotion[]> {
-    return this.promotionModel.find({ restaurantId }).exec();
-  }
+//   async findAllByRestaurant(restaurantId: string): Promise<Promotion[]> {
+//     return this.promotionModel.find({ restaurantId }).exec();
+//   }
 
-  async delete(promotionId: string): Promise<void> {
-    const result = await this.promotionModel.findByIdAndDelete(promotionId);
-    if (!result) {
-      throw new NotFoundException('Promotion not found');
-    }
-  }
-}
+//   async delete(promotionId: string): Promise<void> {
+//     const result = await this.promotionModel.findByIdAndDelete(promotionId);
+//     if (!result) {
+//       throw new NotFoundException('Promotion not found');
+//     }
+//   }
+// }
 
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
